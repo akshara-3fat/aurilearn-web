@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Aurilearn design tokens — taken from the redesign canvas.
+ * Every token here becomes a Tailwind utility, e.g. --color-gold-500 → bg-gold-500.
+ */
+@theme {
+  /* Navy — dark section grounds, darkest first */
+  --color-navy-950: #050a14; /* footer */
+  --color-navy-900: #070d19; /* header, hero, dark sections */
+  --color-navy-850: #0b1220; /* text on gold buttons */
+  --color-navy-800: #0d1526; /* dark cards */
+  --color-navy-700: #16203a;
+  --color-navy-600: #1b2540;
+  --color-navy-500: #2a3550;
+
+  /* Gold — brand accent */
+  --color-gold-50: #fbf5e6;
+  --color-gold-100: #f3ecdb; /* icon chips on light */
+  --color-gold-200: #f1e7cc;
+  --color-gold-300: #d9c9a0;
+  --color-gold-400: #e2be6a; /* accent text on dark */
+  --color-gold-500: #c9a13b; /* primary buttons, rules */
+  --color-gold-700: #8a6a1c; /* accent text on light */
+  --color-gold-900: #3d2e08;
+
+  /* Cream — light section grounds and borders */
+  --color-cream-50: #fbfaf7;
+  --color-cream-100: #faf8f3; /* light section ground */
+  --color-cream-200: #f7f4ec; /* headings on dark */
+  --color-cream-300: #f5f2ea; /* body text on dark, light cards */
+  --color-cream-400: #f1ecdf; /* progress tracks */
+  --color-cream-500: #efeae0; /* hairlines */
+  --color-cream-600: #e8e2d4; /* card borders */
+  --color-cream-700: #e2dccd;
+
+  /* Ink — text on light grounds */
+  --color-ink-900: #0f172a; /* headings */
+  --color-ink-700: #344054; /* labels */
+  --color-ink-600: #475467; /* body */
+  --color-ink-500: #667085; /* muted */
+  --color-ink-400: #98a2b3;
+  --color-ink-300: #d0d5dd; /* input borders */
+
+  /* Mist — text on dark grounds */
+  --color-mist-100: #e6e8ee;
+  --color-mist-200: #d9dde5;
+  --color-mist-300: #c5cbd6; /* nav links */
+  --color-mist-400: #a9b1c1; /* body on dark */
+  --color-mist-500: #7d8799;
+
+  /* Status */
+  --color-success-bg: #dcfce7;
+  --color-success-fg: #15803d;
+  --color-info-bg: #dbeafe;
+  --color-info-fg: #1d4ed8;
+  --color-warning-bg: #fef3c7;
+  --color-warning-fg: #b45309;
+  --color-warning-border: #f59e0b;
+
+  /* Type — font variables are set by next/font in layout.tsx */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    var(--font-inter-tight), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --tracking-eyebrow: 0.14em;
+  --tracking-display: -0.022em;
+
+  /* Radii used across the designs */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-4xl: 28px;
+
+  --shadow-card: 0 30px 70px rgb(15 23 42 / 0.1);
+  --shadow-float: 0 40px 100px rgb(0 0 0 / 0.45);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Page container: 1200px max with the designs' fluid side gutter */
+@utility container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Faint grid drawn over dark hero/CTA panels */
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-cream-100 font-sans text-ink-900 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold-500;
+  }
 }

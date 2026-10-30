@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aurilearn Web
 
-## Getting Started
+Frontend for [aurilearn.ai](https://aurilearn.ai), rebuilt from the redesign canvas.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use        # Node 24 (see .nvmrc); Node >= 20.9 works
+npm install
+npm run dev    # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Script                 | What it does                           |
+| ---------------------- | -------------------------------------- |
+| `npm run dev`          | Dev server (Turbopack)                 |
+| `npm run build`        | Production build                       |
+| `npm run start`        | Serve the production build             |
+| `npm run lint`         | ESLint                                 |
+| `npm run typecheck`    | TypeScript, no emit                    |
+| `npm run format`       | Prettier (also sorts Tailwind classes) |
+| `npm run format:check` | Prettier check, for CI                 |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/                 routes (App Router); globals.css holds the design tokens
+  components/
+    ui/                primitives: Button, Badge, Eyebrow, Card…
+    layout/            Header, Footer
+    sections/          page sections shared across routes (Pillars, Security, CTA…)
+  config/site.ts       site name, URLs, nav links
+  lib/utils.ts         cn() class-name helper
+public/images/         static images
+```
 
-## Learn More
+## Design tokens
 
-To learn more about Next.js, take a look at the following resources:
+All tokens live in `src/app/globals.css` under `@theme`. Tailwind v4 has no
+`tailwind.config.js`; each token becomes a utility automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Group | Examples                                                                        | Used for                        |
+| ----- | ------------------------------------------------------------------------------- | ------------------------------- |
+| navy  | `bg-navy-900`, `bg-navy-800`                                                    | dark grounds, dark cards        |
+| gold  | `bg-gold-500`, `text-gold-400`, `text-gold-700`                                 | brand accent, buttons, eyebrows |
+| cream | `bg-cream-100`, `border-cream-600`                                              | light grounds, card borders     |
+| ink   | `text-ink-900`, `text-ink-600`                                                  | text on light                   |
+| mist  | `text-mist-400`, `text-mist-300`                                                | text on dark                    |
+| fonts | `font-sans` (Inter), `font-display` (Inter Tight), `font-mono` (JetBrains Mono) |                                 |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Custom utilities: `container-page` (1200px max width with fluid gutter) and
+`bg-grid` (faint grid over dark panels).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Use gold-700 (not gold-500) for accent text on light grounds — gold-500 fails
+contrast there.
