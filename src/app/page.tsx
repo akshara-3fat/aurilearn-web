@@ -1,18 +1,25 @@
-// Placeholder until the Home screen is built.
-export default function Home() {
+import { Hero } from "@/components/home/hero";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { LearningExperience } from "@/components/home/learning-experience";
+import { AboutSection } from "@/components/sections/about-section";
+import { AnalyticsSection } from "@/components/sections/analytics-section";
+import { ContactCtaSection } from "@/components/sections/contact-cta-section";
+import { MentorshipSection } from "@/components/sections/mentorship-section";
+import { PillarsSection } from "@/components/sections/pillars-section";
+import { SecuritySection } from "@/components/sections/security-section";
+
+export default function HomePage() {
   return (
-    <main className="flex flex-1 items-center bg-navy-900 bg-grid">
-      <div className="container-page flex flex-col gap-4 py-24">
-        <span className="font-mono text-xs tracking-eyebrow text-gold-400 uppercase">
-          Setup complete
-        </span>
-        <h1 className="font-display text-5xl font-semibold tracking-display text-cream-200">
-          Aurilearn
-        </h1>
-        <p className="max-w-xl text-lg text-mist-400">
-          Design tokens, fonts and tooling are in place. Screens come next.
-        </p>
-      </div>
-    </main>
+    <>
+      <Hero />
+      <PillarsSection />
+      <LearningExperience />
+      <HowItWorks />
+      <MentorshipSection />
+      <SecuritySection />
+      <AnalyticsSection />
+      <AboutSection />
+      <ContactCtaSection />
+    </>
   );
 }

@@ -1,0 +1,2 @@
+# Local-only settings (e.g. the localhost backend URL) must not reach Vercel builds.
+.env*.local
