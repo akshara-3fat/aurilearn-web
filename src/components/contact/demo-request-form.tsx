@@ -3,6 +3,7 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { trackEvent } from "@/lib/analytics";
 
 const roles = [
   "C-Suite / Executive",
@@ -249,6 +250,8 @@ export function DemoRequestForm() {
     setErrorMessage("");
     try {
       await submitDemoRequest(values);
+      // Only after the server saved it; no form values are sent to Google.
+      trackEvent({ name: "generate_lead", params: { form: "demo_request" } });
       setFirstName(values.firstName);
       setStatus("sent");
     } catch (error) {
