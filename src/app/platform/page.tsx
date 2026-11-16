@@ -4,12 +4,14 @@ import { ScalabilitySection } from "@/components/platform/scalability-section";
 import { ContactCtaSection } from "@/components/sections/contact-cta-section";
 import { MentorshipSection } from "@/components/sections/mentorship-section";
 import { PillarsSection } from "@/components/sections/pillars-section";
+import { pageMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Platform",
   description:
     "A personal AI instructor, hands-on labs and exam preparation for every learner, with the analytics to show it worked.",
-};
+  path: "/platform",
+});
 
 export default function PlatformPage() {
   return (

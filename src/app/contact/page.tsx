@@ -4,12 +4,14 @@ import { DemoRequestForm } from "@/components/contact/demo-request-form";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Accent } from "@/components/ui/section-heading";
 import { siteConfig } from "@/config/site";
+import { pageMetadata } from "@/config/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
     "Book a 30-minute discovery call or request an enterprise demo of Aurilearn.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
